@@ -39,9 +39,6 @@ NPM을 대체하기 위해 바이브 코드가 포함하여 작업한 역방향 
 ### 1. Docker Compose 설치
 
 ```bash
-# 저장소 복제
-git clone <repository-url>
-cd npmx
 
 # 환경 설정
 cp .env.docker .env
