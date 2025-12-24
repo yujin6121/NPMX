@@ -1,6 +1,5 @@
 # NPMX
-- [EN](https://github.com/yujin6121/NPMX/blob/main/README-EN.md)
-- [KO](https://github.com/yujin6121/NPMX/blob/main/README.md)
+[EN](https://github.com/yujin6121/NPMX/blob/main/README-EN.md) [KO](https://github.com/yujin6121/NPMX/blob/main/README.md)
 NPM을 대체하기 위해 바이브 코드가 포함하여 작업한 역방향 프록시 입니다.
 
 ## ✨ 주요 특징
