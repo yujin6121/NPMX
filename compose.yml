@@ -11,7 +11,7 @@ services:
       - "443:443/udp"
       - "81:81"
     env_file:
-      - .env.production
+      - .env
     volumes:
       - better-npm-data:/data
       # Optional: Mount host certs/logs for persistence / backup
