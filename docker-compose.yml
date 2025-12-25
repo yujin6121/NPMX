@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  npmx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: npmx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # For HTTP/3 QUIC
+      - "81:81"        # Admin Panel
+    env_file:
+      - .env.docker
+    volumes:
+      # Persistent data
+      - better-npm-data:/data
+      
+      # Optional: Custom Nginx configs
+      # - ./custom-nginx:/data/custom_nginx
+      
+      # Optional: Logs
+      # - ./logs:/data/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - better-npm-network
+
+volumes:
+  better-npm-data:
+    driver: local
+
+networks:
+  better-npm-network:
+    driver: bridge

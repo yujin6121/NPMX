@@ -1,0 +1,6 @@
+# Unicode mapping for ModSecurity
+# This is a minimal unicode.map file for basic ASCII support
+# Full unicode.map can be downloaded from ModSecurity repository if needed
+
+# ASCII range (0-127)
+0 127 0
