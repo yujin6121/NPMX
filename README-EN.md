@@ -39,21 +39,12 @@ This is a reverse proxy developed in collaboration with Vibe Code to replace NPM
 ### 1. Install Docker Compose
 
 ```bash
-# Clone repository
-git clone <repository-url>
-cd npmx
+wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
+wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
 
-# Set environment
-cp .env.docker .env
-
-# Edit .env file
 nano .env
 
-# Start services
 docker-compose up -d
-
-# View logs
-docker-compose logs -f npmx
 ```
 
 **Default Account:**
