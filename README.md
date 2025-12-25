@@ -40,17 +40,13 @@
 
 ```bash
 
-# 환경 설정
-cp .env.docker .env
+wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
+wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
 
 # .env 파일 수정
 nano .env
 
-# 서비스 시작
 docker-compose up -d
-
-# 로그 확인
-docker-compose logs -f npmx
 ```
 
 **기본 계정:**
