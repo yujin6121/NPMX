@@ -63,13 +63,16 @@ router.get('/:id', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
     try {
+        console.log('[DEBUG] POST /certificates - Request body:', JSON.stringify(req.body, null, 2));
+        
         const { domain_names, email } = req.body;
 
         if (!domain_names || !Array.isArray(domain_names) || domain_names.length === 0) {
+            console.error('[ERROR] Domain names validation failed:', domain_names);
             return res.status(400).json({
                 error: {
                     code: 400,
-                    message: 'Domain names are required',
+                    message: 'Domain names are required and must be an array',
                 },
             });
         }
@@ -133,6 +136,7 @@ router.post('/', async (req, res, next) => {
 
             res.status(201).json(updatedCert);
         } catch (err) {
+            console.error('[ERROR] Certificate request failed:', err.message, err.stack);
             // Cleanup temp config
             try {
                 await internalNginx.deleteLetsEncryptRequestConfig(certificate);

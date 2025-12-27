@@ -113,11 +113,21 @@ router.post('/', async (req, res, next) => {
         }
 
         // Generate Nginx config
-        await internalNginx.generateProxyHostConfig(proxyHost);
-        await internalNginx.reload();
+        try {
+            await internalNginx.generateProxyHostConfig(proxyHost);
+            await internalNginx.test();
+            await internalNginx.reload();
+            console.log('[SUCCESS] Proxy host created:', proxyHost.id);
+        } catch (nginxErr) {
+            console.error('[ERROR] Nginx config/reload failed:', nginxErr.message);
+            // Delete the proxy host if nginx config fails
+            await ProxyHost.query().deleteById(proxyHost.id);
+            throw new Error('Nginx configuration failed: ' + nginxErr.message);
+        }
 
         res.status(201).json(proxyHost);
     } catch (err) {
+        console.error('[ERROR] Failed to create proxy host:', err.message, err.stack);
         next(err);
     }
 });
@@ -191,11 +201,19 @@ router.put('/:id', async (req, res, next) => {
         }
 
         // Regenerate Nginx config
-        await internalNginx.generateProxyHostConfig(updated);
-        await internalNginx.reload();
+        try {
+            await internalNginx.generateProxyHostConfig(updated);
+            await internalNginx.test();
+            await internalNginx.reload();
+            console.log('[SUCCESS] Proxy host updated:', updated.id);
+        } catch (nginxErr) {
+            console.error('[ERROR] Nginx config/reload failed on update:', nginxErr.message);
+            throw new Error('Nginx configuration failed: ' + nginxErr.message);
+        }
 
         res.json(updated);
     } catch (err) {
+        console.error('[ERROR] Failed to update proxy host:', err.message, err.stack);
         next(err);
     }
 });

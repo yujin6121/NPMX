@@ -60,6 +60,8 @@ const internalNginx = {
             waf_paranoia_level: proxyHost.meta?.waf_paranoia_level || 1,
             bot_block_enabled: proxyHost.meta?.bot_block_enabled ? 1 : 0,
             bot_challenge_enabled: proxyHost.meta?.bot_challenge_enabled ? 1 : 0,
+            enable_modsecurity: ENABLE_MODSECURITY,
+            custom_locations: proxyHost.custom_locations || [],
         });
 
         const configPath = path.join(NGINX_PROXY_HOST_DIR, `${proxyHost.id}.conf`);
