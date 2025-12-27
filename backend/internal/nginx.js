@@ -9,6 +9,7 @@ const NGINX_PROXY_HOST_DIR = `${NGINX_CONFIG_DIR}/proxy_host`;
 const NGINX_TEMP_DIR = `${NGINX_CONFIG_DIR}/temp`;
 const LOG_DIR = process.env.NGINX_LOG_DIR || '/data/logs';
 const TEMPLATE_DIR = path.join(import.meta.dirname, '../templates');
+const ENABLE_MODSECURITY = process.env.ENABLE_MODSECURITY === 'true';
 
 // Ensure directories exist
 [NGINX_CONFIG_DIR, NGINX_PROXY_HOST_DIR, NGINX_TEMP_DIR, LOG_DIR].forEach((dir) => {

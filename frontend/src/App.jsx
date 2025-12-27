@@ -2585,7 +2585,8 @@ function ProxyManager({ user, onLogout, onUserUpdate }) {
                                                     </div>
                                                 </div>
                                                 <div className="p-3">
-                                                    <ComposableMap projectionConfig={{ scale: 135 }} width={760} height={360} className="w-full h-auto">
+                                                    {/* Temporarily disabled - requires rebuild */}
+                                                    {/* <ComposableMap projectionConfig={{ scale: 135 }} width={760} height={360} className="w-full h-auto">
                                                         <Geographies geography={GEOIP_MAP_URL}>
                                                             {({ geographies }) =>
                                                                 geographies.map((geo) => {
@@ -2626,7 +2627,11 @@ function ProxyManager({ user, onLogout, onUserUpdate }) {
                                                                 })
                                                             }
                                                         </Geographies>
-                                                    </ComposableMap>
+                                                    </ComposableMap> */}
+                                                    <div className={`text-center py-8 ${theme.textSecondary}`}>
+                                                        <p>🗺️ Map visualization temporarily disabled</p>
+                                                        <p className="text-xs mt-2">Countries selected above will still work</p>
+                                                    </div>
                                                 </div>
                                             </div>
 
