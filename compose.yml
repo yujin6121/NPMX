@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   npmx:
-    image: "yukineyujin/npmx:${NPMX_IMAGE_TAG:-latest}"
+    image: "yukineyujin/npmx"
     container_name: npmx
     restart: unless-stopped
     ports:
