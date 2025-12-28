@@ -20,3 +20,6 @@ export const GEOIP_COUNTRY_OPTIONS = [
     { code: 'MY', name: '말레이시아', flag: '🇲🇾' },
     { code: 'PH', name: '필리핀', flag: '🇵🇭' }
 ];
+
+// TopoJSON source for the world map used by react-simple-maps
+export const GEOIP_MAP_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
