@@ -14,6 +14,7 @@ import ActivityLog from './ActivityLog';
 import SSLCertificates from './SSLCertificates';
 import Settings from './Settings';
 import { GEOIP_COUNTRY_OPTIONS } from './constants';
+import GeoMap from './GeoMap';
 // HomePage removed; show Login directly when not authenticated
 
 // Configure Axios base URL
@@ -2585,48 +2586,7 @@ function ProxyManager({ user, onLogout, onUserUpdate }) {
                                                     </div>
                                                 </div>
                                                 <div className="p-3">
-                                                    <ComposableMap projectionConfig={{ scale: 135 }} width={760} height={360} className="w-full h-auto">
-                                                        <Geographies geography={GEOIP_MAP_URL}>
-                                                            {({ geographies }) =>
-                                                                geographies.map((geo) => {
-                                                                    const code = geo.properties?.ISO_A2;
-                                                                    const isDenied = code && deniedCountrySet.has(code);
-                                                                    const isAllowed = code && allowedCountrySet.has(code);
-                                                                    const fill = isDenied
-                                                                        ? '#ef4444'
-                                                                        : isAllowed
-                                                                            ? '#22c55e'
-                                                                            : isDark
-                                                                                ? '#0f172a'
-                                                                                : '#e2e8f0';
-
-                                                                    return (
-                                                                        <Geography
-                                                                            key={geo.rsmKey}
-                                                                            geography={geo}
-                                                                            fill={fill}
-                                                                            stroke={isDark ? '#1f2937' : '#94a3b8'}
-                                                                            strokeWidth={0.5}
-                                                                            style={{
-                                                                                default: { outline: 'none' },
-                                                                                hover: {
-                                                                                    outline: 'none',
-                                                                                    fill: isDenied
-                                                                                        ? '#b91c1c'
-                                                                                        : isAllowed
-                                                                                            ? '#16a34a'
-                                                                                            : isDark
-                                                                                                ? '#1f2937'
-                                                                                                : '#cbd5e1'
-                                                                                },
-                                                                                pressed: { outline: 'none' }
-                                                                            }}
-                                                                        />
-                                                                    );
-                                                                })
-                                                            }
-                                                        </Geographies>
-                                                    </ComposableMap>
+<GeoMap blockedCountries={[...allowedCountrySet, ...deniedCountrySet].filter(Boolean)} isDark={isDark} className="h-72" />
                                                 </div>
                                             </div>
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Shield, Activity, AlertCircle, LogOut, Cpu, Lock, CheckCircle, Trash2 } from 'lucide-react';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { GEOIP_MAP_URL } from './constants';
+import GeoMap from './GeoMap';
 
 export default function Security({
     activeTab,
@@ -59,33 +58,7 @@ export default function Security({
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-2 bg-slate-50 dark:bg-slate-900 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 relative h-[400px]">
                                 {geoipStats?.blockedCountries && geoipStats.blockedCountries.length > 0 ? (
-                                    <ComposableMap projectionConfig={{ scale: 135 }} width={500} height={400} className="w-full h-full">
-                                        <Geographies geography={GEOIP_MAP_URL}>
-                                            {({ geographies }) =>
-                                                geographies.map((geo) => {
-                                                    const code = geo.properties?.ISO_A2;
-                                                    const isBlocked = code && geoipStats.blockedCountries.includes(code);
-                                                    return (
-                                                        <Geography
-                                                            key={geo.rsmKey}
-                                                            geography={geo}
-                                                            fill={isBlocked ? '#ef4444' : isDark ? '#0f172a' : '#e2e8f0'}
-                                                            stroke={isDark ? '#1f2937' : '#94a3b8'}
-                                                            strokeWidth={0.5}
-                                                            style={{
-                                                                default: { outline: 'none' },
-                                                                hover: {
-                                                                    outline: 'none',
-                                                                    fill: isBlocked ? '#b91c1c' : isDark ? '#1f2937' : '#cbd5e1'
-                                                                },
-                                                                pressed: { outline: 'none' }
-                                                            }}
-                                                        />
-                                                    );
-                                                })
-                                            }
-                                        </Geographies>
-                                    </ComposableMap>
+                                    <GeoMap blockedCountries={geoipStats.blockedCountries} isDark={isDark} />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center">
                                         <div className="text-center space-y-3">
