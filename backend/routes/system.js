@@ -19,6 +19,8 @@ router.get('/info', async (req, res, next) => {
         // CPU usage calculation (container-aware)
         const cpuCount = cpus.length;
         const cpuModel = cpus[0]?.model || 'Unknown';
+        // loadAverage used in response; compute once so it's defined in all code paths
+        const loadAverage = os.loadavg();
 
         // Keep a small in-memory snapshot to compute deltas between requests
         // This allows us to compute a % in the 0..100 range for containers (via cgroup)
@@ -121,7 +123,6 @@ router.get('/info', async (req, res, next) => {
             }
         } else {
             // First-time: fallback to loadavg-derived estimate to avoid returning null
-            const loadAverage = os.loadavg();
             usagePct = (loadAverage[0] / cpuCount * 100);
         }
 
