@@ -41,7 +41,7 @@
 ```bash
 
 wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
-wget https://github.com/yujin6121/NPMX/blob/main/compose.yml
+wget https://github.com/yujin6121/NPMX/blob/main/.env
 
 # .env 파일 수정
 nano .env
